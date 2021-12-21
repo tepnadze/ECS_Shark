@@ -1,18 +1,10 @@
-using System;
 using UnityEngine;
 
-public class JoystickInputService : MonoBehaviour
+public class JoystickInputService : SingletonBase<JoystickInputService>
 {
     [SerializeField] private Joystick joystick;
 
-    public static JoystickInputService instance;
 
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-    }
-    
     public bool isPressed() => Input.GetMouseButton(0);
     public Vector3 getJoystickPosition()
     {

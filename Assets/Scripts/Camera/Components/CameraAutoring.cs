@@ -3,8 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-[RequiresEntityConversion]
-[AddComponentMenu("Custom Autoring/Camera Autoring")]
+[RequiresEntityConversion, AddComponentMenu("Custom Autoring/Camera Autoring")]
 public class CameraAutoring : MonoBehaviour , IConvertGameObjectToEntity
 {
     [SerializeField] private CameraFollower camera_follower_prefab;

@@ -1,8 +1,6 @@
-using System.Numerics;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using Quaternion = UnityEngine.Quaternion;
 
 [UpdateAfter(typeof(JoystickInputSystem))]
 public class SharkMovementSystem : SystemBase
