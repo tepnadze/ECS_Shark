@@ -155,6 +155,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.DefaultCompany.Shark_ECS
     Standalone: com.DefaultCompany.SharkECS
+    iPhone: com.DefaultCompany.SharkECS
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -801,6 +802,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     Android: ENABLE_HYBRID_RENDERER_V2
     Standalone: ENABLE_HYBRID_RENDERER_V2
+    iPhone: ENABLE_HYBRID_RENDERER_V2
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
