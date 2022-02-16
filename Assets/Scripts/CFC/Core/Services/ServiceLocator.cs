@@ -4,16 +4,16 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-public class ServiceLocator : MonoBehaviour
+public class ServiceLocator : SingletonBase<ServiceLocator>
 {
-    #region SERILIZE_FIELDS
 
-    [Header("SERVICES LINKS")]
-
-     private JoystickInputService joystick_input_service = null;
-    #endregion
 
     #region PRIVATE_FIELDS
+
+    private JoystickInputService     joystick_input_service      = null;
+    private SpawnPlayerMemberService spawn_player_member_service = null;
+   
+  
 
     private IDictionary<object, object> services_dictionary = null;
 
@@ -21,9 +21,10 @@ public class ServiceLocator : MonoBehaviour
 
 
     [Inject]
-    public void onConstructor(JoystickInputService joystickInputService) {
+    public void onConstructor(JoystickInputService joystickInputService , SpawnPlayerMemberService spawnPlayerMemberService) {
 
-        joystick_input_service = joystickInputService;
+        joystick_input_service      = joystickInputService;
+        spawn_player_member_service = spawnPlayerMemberService;
       
         initServices(null);
        
@@ -37,9 +38,10 @@ public class ServiceLocator : MonoBehaviour
         {
             services_dictionary = new Dictionary<object, object>();
 
-            services_dictionary.Add(typeof(JoystickInputService), joystick_input_service);
+            services_dictionary.Add(typeof(JoystickInputService)     , joystick_input_service);
+            services_dictionary.Add(typeof(SpawnPlayerMemberService) , spawn_player_member_service);
 
-         
+
         }));
 
         Debug.Log("Service Initialized Status : <color=green> SUCCESS </color>");

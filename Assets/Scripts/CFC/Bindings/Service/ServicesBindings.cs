@@ -9,7 +9,8 @@ public class ServicesBindings : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<JoystickInputService>().FromInstance(new JoystickInputService()).AsSingle();
-        Container.Bind<ServiceLocator>().FromInstance(service_locator);
+        Container.Bind<SpawnPlayerMemberService>().FromInstance(new SpawnPlayerMemberService()).AsSingle();
+        Container.Bind<JoystickInputService>()    .FromInstance(new JoystickInputService()).AsSingle();
+        Container.Bind<ServiceLocator>()          .FromInstance(service_locator);
     }
 }
