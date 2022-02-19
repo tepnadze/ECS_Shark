@@ -1,34 +1,39 @@
 using System.Collections;
 using UnityEngine;
 
-public class QuickCodeTesting : MonoBehaviour
+public class QuickCodeTesting : MonoBehaviour , IServiceInitSubscriber
 {
 
     private SpawnPlayerMemberService service;
 
 
-    private void Start()
+    private void Awake()
     {
-        StartCoroutine(testing());
-      
+        InterfaceEventsService.subscribe(this);
     }
+
+    private void OnDestroy()
+    {
+        InterfaceEventsService.deSubscribe(this);
+    }
+
+  
 
     private void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !ReferenceEquals(service , null))
         {
-            for (int i = 0; i < 300; i++)
-            {
-                service.generatePlayerMember();
-            }
+            service.generatePlayerMember();
+          
         }
     }
 
-    private IEnumerator testing()
+ 
+
+  
+
+    public void onGetServices()
     {
-
-        yield return new WaitForSeconds(2f);
-
         service = ServiceLocator.instance.service<SpawnPlayerMemberService>();
     }
 }

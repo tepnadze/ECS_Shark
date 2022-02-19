@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
 public class ServiceLocator : SingletonBase<ServiceLocator>
@@ -26,7 +25,11 @@ public class ServiceLocator : SingletonBase<ServiceLocator>
         joystick_input_service      = joystickInputService;
         spawn_player_member_service = spawnPlayerMemberService;
       
-        initServices(null);
+        initServices(()=> {
+           
+            InterfaceEventsService.callEvent<IServiceInitSubscriber>((subscribers)=> { subscribers.onGetServices();});
+       
+        });
        
     }
 
@@ -44,7 +47,6 @@ public class ServiceLocator : SingletonBase<ServiceLocator>
 
         }));
 
-        Debug.Log("Service Initialized Status : <color=green> SUCCESS </color>");
         callback?.Invoke();
     }
 
