@@ -58,3 +58,4 @@ public interface IInterfaceSubscriber { }
 public interface IServiceInitSubscriber : IInterfaceSubscriber {
     public void onGetServices();
 }
+

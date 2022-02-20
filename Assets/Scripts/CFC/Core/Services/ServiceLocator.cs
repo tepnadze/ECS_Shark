@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 public class ServiceLocator : SingletonBase<ServiceLocator>
@@ -11,7 +12,7 @@ public class ServiceLocator : SingletonBase<ServiceLocator>
 
     private JoystickInputService     joystick_input_service      = null;
     private SpawnPlayerMemberService spawn_player_member_service = null;
-   
+    private MonoInitService          mono_init_service           = null;
   
 
     private IDictionary<object, object> services_dictionary = null;
@@ -24,28 +25,20 @@ public class ServiceLocator : SingletonBase<ServiceLocator>
 
         joystick_input_service      = joystickInputService;
         spawn_player_member_service = spawnPlayerMemberService;
-      
-        initServices(()=> {
-           
-            InterfaceEventsService.callEvent<IServiceInitSubscriber>((subscribers)=> { subscribers.onGetServices();});
-       
-        });
-       
+        mono_init_service           = new MonoInitService();
+        
+        initServices(null);
+
     }
 
   
-    public async void initServices(Action callback)
+    public void initServices(Action callback)
     {
 
-        await Task.Run((() =>
-        {
-            services_dictionary = new Dictionary<object, object>();
-
-            services_dictionary.Add(typeof(JoystickInputService)     , joystick_input_service);
-            services_dictionary.Add(typeof(SpawnPlayerMemberService) , spawn_player_member_service);
-
-
-        }));
+       services_dictionary = new Dictionary<object, object>();
+       services_dictionary.Add(typeof(JoystickInputService)     , joystick_input_service);
+       services_dictionary.Add(typeof(SpawnPlayerMemberService) , spawn_player_member_service);
+       services_dictionary.Add(typeof(MonoInitService)          , mono_init_service);
 
         callback?.Invoke();
     }

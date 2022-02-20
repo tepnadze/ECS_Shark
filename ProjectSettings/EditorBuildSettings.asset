@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CFC/Game/Gameplay_scene.unity
+    guid: 79acb8cd805684541b930303f2fef135
+  - enabled: 1
+    path: Assets/Scenes/CFC/Testing/TestingLoading.unity
+    guid: 1129d913254acbf4abead24d30a3a30c
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 79dfd7bb502599747be30bb967d298cd, type: 2}
